@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+const API_URL=import.meta.env.VITE_API_URL;
 interface SignupForm {
   emailid: string;
   password: string;
@@ -66,10 +66,10 @@ interface SignupForm {
 
   if (!validate()) return;
 
-  let url = "https://stich-aura-vite-olive.vercel.app/user/signupaxios";
+  // let url = "https://stich-aura-vite-olive.vercel.app/user/signupaxios";
 
   try {
-    let response = await axios.post(url, form);
+    let response = await axios.post( `${API_URL}/user/signupaxios`, form);
     console.log("RESPONSE:", response.data);
     alert(response.data.msg);
 
