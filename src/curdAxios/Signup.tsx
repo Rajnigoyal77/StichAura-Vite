@@ -66,7 +66,7 @@ interface SignupForm {
 
   if (!validate()) return;
 
-  let url = "/user/signupaxios";
+  let url = "https://stich-aura-vite-olive.vercel.app/user/signupaxios";
 
   try {
     let response = await axios.post(url, form);

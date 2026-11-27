@@ -12,7 +12,7 @@ function FindTailor() {
 async function doGetCities() 
 {
 
-  let url = "/tailor/getcities";
+  let url = "https://stich-aura-vite-olive.vercel.app/tailor/getcities";
 
   let response = await axios.post(url);
 
@@ -29,7 +29,7 @@ async function doGetCities()
 
     setSelectedSpeciality("");
 
-    let url = "/tailor/getspeciality";
+    let url = "https://stich-aura-vite-olive.vercel.app/tailor/getspeciality";
 
     // let response = await axios.post(
     //   url,
@@ -48,7 +48,7 @@ async function doGetCities()
 
   async function findRecord() {
 
-    let url = "/tailor/tailorfullrecord";
+    let url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorfullrecord";
 
     let response3 = await axios.post
     (

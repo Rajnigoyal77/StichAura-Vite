@@ -153,7 +153,7 @@ export default function ProfileTailor()
     try {
 
       const response = await axios.post(
-        "/tailor/extractaadhaar",
+        "https://stich-aura-vite-olive.vercel.app/tailor/extractaadhaar",
         formData,
         {
           headers: {
@@ -210,7 +210,7 @@ export default function ProfileTailor()
 
     const token = localStorage.getItem("token");
 
-    let url = "/tailor/tailorprofilesignup";
+    let url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorprofilesignup";
 
     let frmData = new FormData();
 
@@ -255,7 +255,7 @@ export default function ProfileTailor()
 
     const token = localStorage.getItem("token");
 
-    const url = "/tailor/tailorprofileupdate";
+    const url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorprofileupdate";
 
     let frmData = new FormData();
 
@@ -300,7 +300,7 @@ export default function ProfileTailor()
 
     const token = localStorage.getItem("token");
 
-    let url = "/tailor/tailorprofilesearch";
+    let url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorprofilesearch";
 
     let response2 = await axios.post(
       url,

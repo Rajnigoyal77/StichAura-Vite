@@ -55,7 +55,7 @@ const Signup = () => {
     e.preventDefault();
 
     let url =
-      "/customer/customerprofilesignup";
+      "https://stich-aura-vite-olive.vercel.app/customer/customerprofilesignup";
 
     let frmData = new FormData();
 
@@ -95,7 +95,7 @@ const Signup = () => {
 
   const handleUpdate = async () => {
     let url =
-      "/customer/customerprofileupdate";
+      "https://stich-aura-vite-olive.vercel.app/customer/customerprofileupdate";
 
     let frmData = new FormData();
 
@@ -117,7 +117,7 @@ const Signup = () => {
 
   async function doFind() {
     let url =
-      "/customer/customerprofilesearch";
+      "https://stich-aura-vite-olive.vercel.app/customer/customerprofilesearch";
 
     let response2 = await axios.post(
       url,
