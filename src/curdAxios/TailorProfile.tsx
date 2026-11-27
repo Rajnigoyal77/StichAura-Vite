@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-
+const API_URL=import.meta.env.VITE_API_URL;
 interface TailorType {
   personal: {
     emailid: string;
@@ -153,7 +153,7 @@ export default function ProfileTailor()
     try {
 
       const response = await axios.post(
-        "https://stich-aura-vite-olive.vercel.app/tailor/extractaadhaar",
+       `${API_URL}/tailor/extractaadhaar`,
         formData,
         {
           headers: {
@@ -210,7 +210,7 @@ export default function ProfileTailor()
 
     const token = localStorage.getItem("token");
 
-    let url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorprofilesignup";
+    // let url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorprofilesignup";
 
     let frmData = new FormData();
 
@@ -240,7 +240,7 @@ export default function ProfileTailor()
     frmData.append("shopcity", tailor.professional.shopcity);
     frmData.append("otherinfo", tailor.professional.otherinfo);
 
-    await axios.post(url, frmData,
+    await axios.post(`${API_URL}/tailor/tailorprofilesignup`, frmData,
       {
         headers: {
           Authorization: "Bearer " + token
@@ -255,7 +255,7 @@ export default function ProfileTailor()
 
     const token = localStorage.getItem("token");
 
-    const url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorprofileupdate";
+    // const url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorprofileupdate";
 
     let frmData = new FormData();
 
@@ -285,7 +285,7 @@ export default function ProfileTailor()
     frmData.append("shopcity", tailor.professional.shopcity);
     frmData.append("otherinfo", tailor.professional.otherinfo);
 
-    await axios.post(url, frmData, {
+    await axios.post(`${API_URL}/tailor/tailorprofileupdate`, frmData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: "Bearer " + token
@@ -300,10 +300,10 @@ export default function ProfileTailor()
 
     const token = localStorage.getItem("token");
 
-    let url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorprofilesearch";
+    // let url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorprofilesearch";
 
     let response2 = await axios.post(
-      url,
+      `${API_URL}/tailor/tailorprofilesearch`,
       { emailid: tailor.personal.emailid },
       {
         headers: {

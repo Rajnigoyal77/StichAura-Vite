@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+const API_URL=import.meta.env.VITE_API_URL;
 function Reviews() {
 
   const [formData, setFormData] = useState({
@@ -16,10 +16,10 @@ function Reviews() {
   if (formData.contact === "") 
     return;
 
-  let url = "https://stich-aura-vite-olive.vercel.app/review/tailornamesearch";
+  // let url = "https://stich-aura-vite-olive.vercel.app/review/tailornamesearch";
 
   try {
-    let response = await axios.post(url, { contact: formData.contact });
+    let response = await axios.post(`${API_URL}/review/tailornamesearch`, { contact: formData.contact });
 
     if (response.data.status) {
       setFormData({
@@ -54,7 +54,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 
   try {
     const response = await axios.post(
-     "https://stich-aura-vite-olive.vercel.app/review/tailorreview",
+     `${API_URL}/review/tailorreview`,
       formData,
       {
         headers: {

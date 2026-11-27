@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+const API_URL=import.meta.env.VITE_API_URL;
 interface SignupFormState {
   emailid: string;
   profilepic: null | File;
@@ -54,8 +54,7 @@ const Signup = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let url =
-      "https://stich-aura-vite-olive.vercel.app/customer/customerprofilesignup";
+    // let url ="https://stich-aura-vite-olive.vercel.app/customer/customerprofilesignup";
 
     let frmData = new FormData();
 
@@ -70,7 +69,7 @@ const Signup = () => {
       frmData.append("profilepic", formData.profilepic);
     }
 
-    let response = await axios.post(url, frmData);
+    let response = await axios.post(`${API_URL}/customer/customerprofilesignup`, frmData);
 
     alert(JSON.stringify(response.data));
     alert("Signup Success & Mail Sent ✅");
@@ -94,8 +93,7 @@ const Signup = () => {
   }
 
   const handleUpdate = async () => {
-    let url =
-      "https://stich-aura-vite-olive.vercel.app/customer/customerprofileupdate";
+    // let url ="https://stich-aura-vite-olive.vercel.app/customer/customerprofileupdate";
 
     let frmData = new FormData();
 
@@ -110,14 +108,14 @@ const Signup = () => {
       frmData.append("profilepic", formData.profilepic);
     }
 
-    let response1 = await axios.post(url, frmData);
+    let response1 = await axios.post(`${API_URL}/customer/customerprofilesignup`, frmData);
 
     alert(JSON.stringify(response1.data));
   };
 
   async function doFind() {
     let url =
-      "https://stich-aura-vite-olive.vercel.app/customer/customerprofilesearch";
+      "https://stich-aura-vite-olive.vercel.app/customer/customerprofileupdate";
 
     let response2 = await axios.post(
       url,

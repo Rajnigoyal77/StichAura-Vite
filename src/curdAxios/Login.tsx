@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+const API_URL=import.meta.env.VITE_API_URL;
 interface LoginData {
   emailid: string;
   password: string;
@@ -36,10 +36,10 @@ if (formData.password.trim() === "") {
   return;
 }
 
-   let url = "https://stich-aura-vite-olive.vercel.app/user/loginaxios";
+  //  let url = "https://stich-aura-vite-olive.vercel.app/user/loginaxios";
 
     try {
-      let response = await axios.post(url, formData);
+      let response = await axios.post(`${API_URL}/user/loginaxios`, formData);
 
       console.log("LOGIN RESPONSE:", response.data);
 

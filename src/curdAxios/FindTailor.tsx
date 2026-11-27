@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+const API_URL=import.meta.env.VITE_API_URL;
 function FindTailor() {
 
   const [selectedCity, setSelectedCity] = useState("");
@@ -12,9 +12,9 @@ function FindTailor() {
 async function doGetCities() 
 {
 
-  let url = "https://stich-aura-vite-olive.vercel.app/tailor/getcities";
+  // let url = "https://stich-aura-vite-olive.vercel.app/tailor/getcities";
 
-  let response = await axios.post(url);
+  let response = await axios.post(`${API_URL}/tailor/getcities`);
 
   if (response.data.cities) {
     setCities([...new Set(response.data.cities as string[])]);
@@ -29,14 +29,14 @@ async function doGetCities()
 
     setSelectedSpeciality("");
 
-    let url = "https://stich-aura-vite-olive.vercel.app/tailor/getspeciality";
+    // let url = "https://stich-aura-vite-olive.vercel.app/tailor/getspeciality";
 
     // let response = await axios.post(
     //   url,
     //   { category: category },
     //   { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
    // );
-     const response= await axios.post(url, 
+     const response= await axios.post(`${API_URL}/tailor/getspeciality`, 
   { category: category }
 );
 
@@ -48,11 +48,11 @@ async function doGetCities()
 
   async function findRecord() {
 
-    let url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorfullrecord";
+    // let url = "https://stich-aura-vite-olive.vercel.app/tailor/tailorfullrecord";
 
     let response3 = await axios.post
     (
-      url,
+      `${API_URL}/tailor/tailorfullrecord`,
       {
         shopcity: selectedCity,
         category: category,
@@ -68,9 +68,6 @@ async function doGetCities()
       alert("No tailors found❌");
     }
   }
-
-  
-  
 
 return (
 
