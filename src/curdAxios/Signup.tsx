@@ -10,9 +10,81 @@ interface SignupForm {
   
 }
 
-   export default function Signup() {
+//    export default function Signup() {
 
-     const navigate = useNavigate();
+//      const navigate = useNavigate();
+//   const [form, setForm] = useState<SignupForm>({
+//     emailid: "",
+//     password: "",
+//     usertype: "",
+//   });
+
+//   const [errors, setErrors] = useState<Partial<SignupForm>>({});
+
+//   const handleChange = (
+//     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+//   ) => {
+//     const { name, value } = e.target;
+
+//     setForm((prev) => ({
+//       ...prev,
+//       [name]: value,
+//     }));
+//   };
+
+//   const validate = (): boolean => {
+//     const newErrors: Partial<SignupForm> = {};
+
+//      if (!form.emailid) {
+//     newErrors.emailid = "Email is required";
+//   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.emailid)) {
+//     newErrors.emailid = "Invalid email format";
+//   }
+
+//   if (!form.password) {
+//     newErrors.password = "Password is required";
+//   } else if (form.password.length < 6) {
+//     newErrors.password = "Password must be at least 6 characters";
+//   }
+
+//   if (!form.usertype) {
+//     newErrors.usertype = "Please select user type";
+//   }
+
+//   setErrors(newErrors);
+//   return Object.keys(newErrors).length === 0;
+// };
+//       const [showPassword, setShowPassword] = useState(false);
+
+
+ 
+//       ///////////signup button 1 step for click
+//  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => 
+//   {
+//   e.preventDefault();
+
+//   if (!validate()) return;
+
+//   // let url = "https://stich-aura-vite-olive.vercel.app/user/signupaxios";
+
+//   try {
+//     let response = await axios.post( `${API_URL}/user/signupaxios`, form);
+//     console.log("RESPONSE:", response.data);
+//     alert(response.data.msg);
+
+    
+//   } catch (error: any) {
+//     console.log("ERROR:", error.response?.data || error.message);
+//   }
+
+
+
+// };
+
+export default function Signup() {
+
+  const navigate = useNavigate();
+
   const [form, setForm] = useState<SignupForm>({
     emailid: "",
     password: "",
@@ -20,6 +92,9 @@ interface SignupForm {
   });
 
   const [errors, setErrors] = useState<Partial<SignupForm>>({});
+  const [message, setMessage] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -30,56 +105,66 @@ interface SignupForm {
       ...prev,
       [name]: value,
     }));
+
+    setMessage("");
   };
 
   const validate = (): boolean => {
     const newErrors: Partial<SignupForm> = {};
 
-     if (!form.emailid) {
-    newErrors.emailid = "Email is required";
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.emailid)) {
-    newErrors.emailid = "Invalid email format";
-  }
+    if (!form.emailid) {
+      newErrors.emailid = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.emailid)) {
+      newErrors.emailid = "Invalid email format";
+    }
 
-  if (!form.password) {
-    newErrors.password = "Password is required";
-  } else if (form.password.length < 6) {
-    newErrors.password = "Password must be at least 6 characters";
-  }
+    if (!form.password) {
+      newErrors.password = "Password is required";
+    } else if (form.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
 
-  if (!form.usertype) {
-    newErrors.usertype = "Please select user type";
-  }
+    if (!form.usertype) {
+      newErrors.usertype = "Please select user type";
+    }
 
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
-};
-      const [showPassword, setShowPassword] = useState(false);
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Signup button
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setMessage("");
+
+    if (!validate()) return;
+
+    try {
+      let response = await axios.post(
+        `${API_URL}/user/signupaxios`,
+        form
+      );
+
+      console.log("RESPONSE:", response.data);
+      alert(response.data.msg);
+
+    } catch (error: any) {
+      console.log("ERROR:", error.response?.data || error.message);
+
+      if (error.response?.status === 409) {
+        setMessage("Email already registered!");
+      }
+    }
+  };
+
+  // Return ke andar apna existing JSX rakho
+}
 
 
- 
-      ///////////signup button 1 step for click
- const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => 
-  {
-  e.preventDefault();
-
-  if (!validate()) return;
-
-  // let url = "https://stich-aura-vite-olive.vercel.app/user/signupaxios";
-
-  try {
-    let response = await axios.post( `${API_URL}/user/signupaxios`, form);
-    console.log("RESPONSE:", response.data);
-    alert(response.data.msg);
-
-    
-  } catch (error: any) {
-    console.log("ERROR:", error.response?.data || error.message);
-  }
 
 
-
-};
 return (
   <div className="min-h-screen w-full bg-[#111] text-white flex flex-col overflow-x-hidden">
 
@@ -242,13 +327,21 @@ return (
           </div>
 
           {/* BUTTON */}
+    
+
           <button
-            type="submit"
-            className="w-full bg-amber-400 hover:bg-amber-500 transition
-            py-3 rounded-xl font-semibold text-base sm:text-lg text-black"
-          >
-            Signup
-          </button>
+  type="submit"
+  className="w-full bg-amber-400 hover:bg-amber-500 transition
+  py-3 rounded-xl font-semibold text-base sm:text-lg text-black"
+>
+  Signup
+</button>
+
+{message && (
+  <p className="text-red-500 text-center mt-2 text-sm font-medium">
+    {message}
+  </p>
+)}
 
         </form>
       </div>
