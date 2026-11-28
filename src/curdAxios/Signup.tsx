@@ -35,26 +35,25 @@ interface SignupForm {
   const validate = (): boolean => {
     const newErrors: Partial<SignupForm> = {};
 
-    if (!form.emailid) {
-      newErrors.emailid = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.emailid)) {
-      newErrors.emailid = "Invalid email format";
-    }
+     if (!form.emailid) {
+    newErrors.emailid = "Email is required";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.emailid)) {
+    newErrors.emailid = "Invalid email format";
+  }
 
-    if (!form.password) {
-      newErrors.password = "Password is required";
-    } else if (form.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-    }
+  if (!form.password) {
+    newErrors.password = "Password is required";
+  } else if (form.password.length < 6) {
+    newErrors.password = "Password must be at least 6 characters";
+  }
 
-    if (!form.usertype) {
-      newErrors.usertype = "Please select user type";
-    }
+  if (!form.usertype) {
+    newErrors.usertype = "Please select user type";
+  }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
       const [showPassword, setShowPassword] = useState(false);
 
 
